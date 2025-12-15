@@ -16,7 +16,6 @@ const asset = (path: string) => {
 
 export const HERO_IMAGE = "https://k.sinaimg.cn/n/sinakd20240212s/258/w1324h534/20240212/8b62-1259e8f66858e922c09268686d6545b7.png/w700d1q75cms.jpg";
 export const ABOUT_IMAGE_1 = asset("acerca.jpg");
-export const ABOUT_IMAGE_2 = asset("tipo1.jpg"); 
 export const PATTERN_IMAGE = "https://k.sinaimg.cn/n/sinakd20240212s/538/w1000h538/20240212/e8f7-f1388b0227d81a938c5f5904d6074218.png/w700d1q75cms.jpg";
 
 // Constantes para la nueva sección "Otros Proyectos"

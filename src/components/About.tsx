@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { ABOUT_IMAGE_1, ABOUT_IMAGE_2 } from '../constants';
+import { ABOUT_IMAGE_1 } from '../constants';
 
 // Animación de texto tipo máscara (aparece desde abajo)
 const maskReveal: Variants = {
