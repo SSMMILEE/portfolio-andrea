@@ -362,7 +362,7 @@ const ProjectDetail: React.FC = () => {
                    animate="visible"
                    className="w-full lg:w-auto lg:min-w-[400px] flex-shrink-0 flex justify-center lg:justify-end z-0"
                 >
-                   <VinylRecord image={project.coverImage} className="scale-90 lg:scale-100" />
+                   <VinylRecord image={project.images[0]} className="scale-90 lg:scale-100" />
                 </motion.div>
              )}
 
