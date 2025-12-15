@@ -17,7 +17,6 @@ const Asterisk = ({ className }: { className?: string }) => (
 export const RevealText = ({ text, className = "", delay = 0 }: { text: string; className?: string, delay?: number }) => {
   const letters = text.split("");
   
-  // CORRECCIÓN: Eliminamos el parámetro 'i' que no se usaba
   const container: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -78,7 +77,8 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div 
             style={{ y: yBackground }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-red/20 rounded-full blur-[120px] opacity-50"
+            // OPTIMIZACIÓN: Reducir blur en móviles usando media queries (blur-xl en vez de blur-[120px])
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-brand-red/20 rounded-full blur-3xl md:blur-[120px] opacity-50"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
                 scale: [1, 1.2, 1],
@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
         />
          <motion.div 
             style={{ y: yBackground }}
-            className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[100px]"
+            className="absolute bottom-0 right-0 w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-blue-900/10 rounded-full blur-3xl md:blur-[100px]"
             initial={{ opacity: 0 }}
             animate={{ 
                 opacity: 1,
@@ -103,7 +103,10 @@ const Hero: React.FC = () => {
                 default: { duration: 10, repeat: Infinity, ease: "easeInOut" }
             }}
         />
-        <div className="absolute inset-0 opacity-[0.07]" style={{ 
+        
+        {/* OPTIMIZACIÓN: El filtro de ruido SVG es MUY pesado para móviles. 
+            Lo ocultamos con 'hidden md:block' para que solo aparezca en escritorio. */}
+        <div className="absolute inset-0 opacity-[0.07] hidden md:block" style={{ 
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
         }} />
       </div>
