@@ -75,18 +75,21 @@ const Hero: React.FC = () => {
       
       {/* Background Animation & Noise */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        
+        {/* OPTIMIZACIÓN: Delay de 0.8s en la carga del fondo. 
+            Esto permite que la transición de página termine ANTES de renderizar estos elementos pesados. */}
         <motion.div 
             style={{ y: yBackground }}
-            // OPTIMIZACIÓN: Reducir blur en móviles usando media queries (blur-xl en vez de blur-[120px])
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-brand-red/20 rounded-full blur-3xl md:blur-[120px] opacity-50"
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={{ 
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.5, 0.3],
             }}
             transition={{ 
-                scale: { duration: 1.5, ease: "easeOut" },
-                default: { duration: 8, repeat: Infinity, ease: "easeInOut" }
+                opacity: { delay: 0.8, duration: 1 }, // Retraso clave
+                scale: { duration: 1.5, ease: "easeOut", delay: 0.8 },
+                default: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
             }}
         />
          <motion.div 
@@ -99,25 +102,31 @@ const Hero: React.FC = () => {
                 y: [0, -50, 0],
             }}
             transition={{ 
-                opacity: { duration: 2 },
-                default: { duration: 10, repeat: Infinity, ease: "easeInOut" }
+                opacity: { delay: 1, duration: 2 },
+                default: { duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }
             }}
         />
         
-        {/* OPTIMIZACIÓN: El filtro de ruido SVG es MUY pesado para móviles. 
-            Lo ocultamos con 'hidden md:block' para que solo aparezca en escritorio. */}
-        <div className="absolute inset-0 opacity-[0.07] hidden md:block" style={{ 
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
-        }} />
+        {/* OPTIMIZACIÓN: El ruido aparece suavemente después de 1 segundo */}
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.07 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="absolute inset-0 hidden md:block" 
+            style={{ 
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
+            }} 
+        />
       </div>
 
       {/* 3D STAR */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+        {/* OPTIMIZACIÓN: La estrella es el elemento más pesado. La mostramos solo cuando la animación de página termina. */}
         <motion.div 
             style={{ y: yBackground }}
             initial={{ scale: 0, opacity: 0, rotate: -180 }}
             animate={{ scale: 1, opacity: 0.8, rotate: 0 }}
-            transition={{ duration: 1.5, type: "spring", bounce: 0.3 }}
+            transition={{ delay: 0.8, duration: 1.5, type: "spring", bounce: 0.3 }}
         >
              <InteractiveStar className="w-[300px] h-[300px] md:w-[650px] md:h-[650px]" />
         </motion.div>
