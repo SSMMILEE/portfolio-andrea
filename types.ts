@@ -7,14 +7,14 @@ export interface Project {
   images: string[];
   tools?: string[];
   year: string;
-  bookSpread?: string; // Deprecated but kept for compatibility if needed
-  bookCovers?: {
+  bookSpread?: string;
+  bookCovers?: {       
     front: string;
     back: string;
     spine: string;
   };
-  hoodieImage?: string;
-  newspaperImages?: string[]; // New property for the 3D Newspaper stack
+  hoodieImage?: string; 
+  newspaperImages?: string[];
 }
 
 export interface NavItem {

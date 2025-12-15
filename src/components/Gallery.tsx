@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import { MAIN_PROJECTS } from '../constants'; 
-import { Project } from '../types';
+import { Project } from '../../types';
 import TiltImage from './TiltImage';
 
 interface ProjectItemProps {

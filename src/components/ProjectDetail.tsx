@@ -433,7 +433,8 @@ const ProjectDetail: React.FC = () => {
                 >
                   <h4 className="text-xs uppercase tracking-widest text-gray-500 mb-2">Herramientas</h4>
                   <div className="flex flex-wrap gap-2">
-                    {project.tools.map((tool, i) => (
+                    {/* CORRECCIÓN: Quitamos 'i' que no se usaba y añadimos el tipo explícito string */}
+                    {project.tools.map((tool: string) => (
                       <span key={tool} className="border border-white/20 px-3 py-1 text-xs rounded-full hover:bg-white hover:text-black transition-colors cursor-default">
                         {tool}
                       </span>
@@ -463,7 +464,8 @@ const ProjectDetail: React.FC = () => {
 
         {/* Contenedor del Abanico */}
         <div className="relative flex flex-wrap justify-center items-center w-full max-w-[1600px] px-4 perspective-[1000px] gap-4 md:gap-0">
-          {project.images.map((img, index) => {
+          {/* CORRECCIÓN: Añadidos tipos explícitos para img e index */}
+          {project.images.map((img: string, index: number) => {
             const total = project.images.length;
             const mid = (total - 1) / 2;
             const rotation = (index - mid) * 3; 
@@ -481,7 +483,7 @@ const ProjectDetail: React.FC = () => {
                 whileInView={{ 
                   y: yOffset, 
                   opacity: 1, 
-                  rotate: rotation,
+                  rotate: rotation, 
                   scale: 1,
                 }}
                 viewport={{ once: true, margin: "20%" }} 
