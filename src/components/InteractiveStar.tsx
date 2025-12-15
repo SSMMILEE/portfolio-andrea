@@ -13,31 +13,54 @@ export const InteractiveStar: React.FC<{ className?: string }> = ({ className = 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // En móviles, mostrar una estrella estática simple para evitar problemas de rendimiento
+  if (isMobile) {
+    return (
+      <div className={`relative w-full h-full flex items-center justify-center ${className}`}>
+        <svg 
+          viewBox="0 0 24 24" 
+          className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(185,28,28,0.3)]"
+        >
+          <path 
+            d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z"
+            fill="none" 
+            stroke="rgba(255, 255, 255, 0.6)" 
+            strokeWidth="0.2"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path 
+            d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z"
+            fill="rgba(185, 28, 28, 0.05)" 
+            stroke="none"
+          />
+        </svg>
+      </div>
+    );
+  }
+
+  // Versión completa para desktop
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Configuración de físicas simplificada para móviles
-  const springConfig = isMobile ? { damping: 30, stiffness: 100, mass: 0.5 } : { damping: 20, stiffness: 50, mass: 1 };
+  // Configuración de físicas para que el movimiento sea suave (como flotando en agua)
+  const springConfig = { damping: 20, stiffness: 50, mass: 1 };
   
-  // Rotación basada en el mouse (tilt) - solo en desktop
-  const tiltX = useSpring(useTransform(mouseY, [-0.5, 0.5], isMobile ? [10, -10] : [25, -25]), springConfig);
-  const tiltY = useSpring(useTransform(mouseX, [-0.5, 0.5], isMobile ? [-10, 10] : [-25, 25]), springConfig);
+  // Rotación basada en el mouse (tilt)
+  const tiltX = useSpring(useTransform(mouseY, [-0.5, 0.5], [25, -25]), springConfig);
+  const tiltY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-25, 25]), springConfig);
 
-  // Rotación continua automática - más lenta en móviles
+  // Rotación continua automática
   const baseRotate = useMotionValue(0);
 
   useAnimationFrame((_, delta) => {
-    // Gira más lentamente en móviles
-    const speed = isMobile ? 0.005 : 0.015;
-    baseRotate.set(baseRotate.get() + delta * speed);
+    // Gira suavemente 0.02 grados por frame
+    baseRotate.set(baseRotate.get() + delta * 0.015);
   });
 
-  // Combinar rotación automática con la interacción del mouse (solo desktop)
-  const rotateY = useTransform([baseRotate, tiltY], ([base, tilt]) => (base as number) + (isMobile ? 0 : (tilt as number)));
+  // Combinar rotación automática con la interacción del mouse
+  const rotateY = useTransform([baseRotate, tiltY], ([base, tilt]) => (base as number) + (tilt as number));
 
   useEffect(() => {
-    if (isMobile) return; // No mouse tracking en móviles
-    
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
       mouseX.set((e.clientX / innerWidth) - 0.5);
@@ -46,15 +69,14 @@ export const InteractiveStar: React.FC<{ className?: string }> = ({ className = 
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY, isMobile]);
+  }, [mouseX, mouseY]);
 
   // Forma de la estrella (4 puntas clásica)
   const StarPath = "M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z";
 
-  // En móviles, usamos menos planos para mejor rendimiento
-  const planeAngles = isMobile ? [0, 90] : [0, 45, 90, 135];
-  
-  const planes = planeAngles.map((deg, i) => (
+  // Creamos 4 planos rotados para formar la estrella 3D "volumétrica"
+  // Usamos 0, 45, 90, 135 grados para cubrir todos los ángulos
+  const planes = [0, 45, 90, 135].map((deg, i) => (
     <motion.div
       key={i}
       style={{ 
@@ -82,15 +104,11 @@ export const InteractiveStar: React.FC<{ className?: string }> = ({ className = 
           fill="rgba(185, 28, 28, 0.05)" 
           stroke="none"
         />
-        {/* Puntos de luz en las esquinas - menos animaciones en móviles */}
-        {!isMobile && (
-          <>
-            <circle cx="12" cy="0" r="0.4" fill="white" className="animate-pulse" />
-            <circle cx="12" cy="24" r="0.4" fill="white" className="animate-pulse" />
-            <circle cx="0" cy="12" r="0.4" fill="white" className="animate-pulse" />
-            <circle cx="24" cy="12" r="0.4" fill="white" className="animate-pulse" />
-          </>
-        )}
+        {/* Puntos de luz en las esquinas */}
+        <circle cx="12" cy="0" r="0.4" fill="white" className="animate-pulse" />
+        <circle cx="12" cy="24" r="0.4" fill="white" className="animate-pulse" />
+        <circle cx="0" cy="12" r="0.4" fill="white" className="animate-pulse" />
+        <circle cx="24" cy="12" r="0.4" fill="white" className="animate-pulse" />
       </svg>
     </motion.div>
   ));
@@ -109,11 +127,9 @@ export const InteractiveStar: React.FC<{ className?: string }> = ({ className = 
       >
         {planes}
         
-        {/* Núcleo brillante central - más simple en móviles */}
+        {/* Núcleo brillante central */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white blur-md rounded-full" />
-        {!isMobile && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-brand-red blur-2xl opacity-40 rounded-full" />
-        )}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-brand-red blur-2xl opacity-40 rounded-full" />
       </motion.div>
     </div>
   );
