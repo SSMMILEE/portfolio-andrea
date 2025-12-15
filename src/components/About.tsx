@@ -62,22 +62,6 @@ const About: React.FC = () => {
                 />
               </div>
             </div>
-            
-            {/* Image 2: La secundaria, más pequeña (50% del ancho) y superpuesta */}
-            <div className="flex justify-end -mt-16 md:-mt-32 relative z-20">
-               <motion.div 
-                 initial={{ opacity: 0, y: 50 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.8, delay: 0.3 }}
-                 className="w-[50%] md:w-[50%]"
-               >
-                  <img 
-                    src={ABOUT_IMAGE_2} 
-                    alt="Skills and Education" 
-                    className="w-full h-auto object-cover rounded-sm shadow-xl border border-brand-gray/20 opacity-90 hover:opacity-100 transition-opacity max-h-[50vh]"
-                  />
-               </motion.div>
-            </div>
           </motion.div>
 
           {/* Text Column */}

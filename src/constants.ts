@@ -22,6 +22,7 @@ export const PATTERN_IMAGE = "https://k.sinaimg.cn/n/sinakd20240212s/538/w1000h5
 // Constantes para la nueva sección "Otros Proyectos"
 export const OTHER_PROJECTS_HEADER = asset("ilusport.png");
 export const OTHER_IMG_1 = asset("publiport.png"); 
+export const OTHER_IMG_5 = asset("cartpubli.png");
 export const OTHER_IMG_2 = asset("tipo1.jpg");
 export const OTHER_IMG_3 = asset("publifotoport.jpg");
 export const OTHER_IMG_4 = asset("ilusport.png");
@@ -121,13 +122,13 @@ export const MAIN_PROJECTS: Project[] = [
 export const OTHER_PROJECTS_LIST: Project[] = [
   {
     id: "publicidad-cursos",
-    title: "Publicidad y Cursos",
+    title: "Diseño Publicidad",
     category: "Social Media Design",
     year: "2023-2024",
     description: "Diseño de publicidades variadas, flyers para cursos y manejo de redes sociales. Realizadas con Photoshop e Illustrator.",
     tools: ["Photoshop", "Illustrator"],
     coverImage: OTHER_IMG_1,
-    images: [OTHER_IMG_1, asset("publicidad1.jpg"), asset("publicidad2.jpg"), asset("publicidad3.jpg")] 
+    images: [asset("publicidad1.jpg"), asset("publicidad2.jpg"), asset("publicidad3.jpg")] 
   },
   {
     id: "carteles-tipograficos",
@@ -136,8 +137,8 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     year: "2023",
     description: "Experimentación para la realización de carteles tipográficos. Algunos de ellos con referencias de la cultura boliviana y expresiones populares.",
     tools: ["Illustrator", "Typography"],
-    coverImage: OTHER_IMG_2,
-    images: [OTHER_IMG_2]
+    coverImage: OTHER_IMG_5,
+    images: [OTHER_IMG_2, asset("cartpubli1.png"), asset("cartpubli3.jpg")]
   },
   {
     id: "publicidad-fotografica",
@@ -147,7 +148,7 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     description: "Publicidades las cuales se realizó con un trabajo fotográfico desde cero, montaje y post-producción.",
     tools: ["Photography", "Photoshop"],
     coverImage: OTHER_IMG_3,
-    images: [OTHER_IMG_3, asset("publfoto1.jpg"), asset("publfoto2.jpg"), asset("publfoto3.jpg")]
+    images: [ asset("publfoto1.jpg"), asset("publfoto2.jpg"), asset("publfoto3.jpg")]
   },
   {
     id: "carteles-ilustrados",
@@ -157,7 +158,7 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     description: "Carteles ilustrados con un estilo artístico predominante. Realizados en programas como IbisPaint y Photoshop.",
     tools: ["IbisPaint", "Photoshop"],
     coverImage: OTHER_IMG_4,
-    images: [OTHER_IMG_4, asset("ilustra1.jpg"), asset("ilustra2jpg.jpg"), asset("ilustra3.jpg")]
+    images: [asset("ilustra1.jpg"), asset("ilustra2jpg.jpg"), asset("ilustra3.jpg")]
   }
 ];
 
