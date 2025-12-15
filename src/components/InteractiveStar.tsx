@@ -21,16 +21,18 @@ export const InteractiveStar: React.FC<{ className?: string }> = ({ className = 
           viewBox="0 0 24 24" 
           className="w-full h-full overflow-visible drop-shadow-[0_0_15px_rgba(185,28,28,0.3)]"
         >
+          {/* Stroke más visible para móviles */}
           <path 
             d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z"
             fill="none" 
-            stroke="rgba(255, 255, 255, 0.6)" 
-            strokeWidth="0.2"
+            stroke="rgba(255, 255, 255, 0.8)" 
+            strokeWidth="0.5"
             vectorEffect="non-scaling-stroke"
           />
+          {/* Relleno sutil más visible */}
           <path 
             d="M12 0L13.5 10.5L24 12L13.5 13.5L12 24L10.5 13.5L0 12L10.5 10.5L12 0Z"
-            fill="rgba(185, 28, 28, 0.05)" 
+            fill="rgba(185, 28, 28, 0.1)" 
             stroke="none"
           />
         </svg>
