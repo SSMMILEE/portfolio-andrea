@@ -48,7 +48,7 @@ export const MAIN_PROJECTS: Project[] = [
     year: "2024",
     description: "Creación de un disco boliviano con fusiones neo contemporáneas. Trabajo en Photoshop con Mockups y diagramación con medidas precisas.",
     tools: ["Photoshop", "Illustrator"],
-    coverImage: asset("kusilloport.jpg"),  // Project 01 Cover
+    coverImage: asset("kudillos2.jpg"),  // Project 01 Cover
     images: [
       asset("kusilloport.jpg"),
       asset("kudillos2.jpeg"),
