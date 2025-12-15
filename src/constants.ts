@@ -16,15 +16,15 @@ const asset = (path: string) => {
 
 export const HERO_IMAGE = "https://k.sinaimg.cn/n/sinakd20240212s/258/w1324h534/20240212/8b62-1259e8f66858e922c09268686d6545b7.png/w700d1q75cms.jpg";
 export const ABOUT_IMAGE_1 = asset("acerca.jpg");
-export const ABOUT_IMAGE_2 = asset("skills.jpg"); 
+export const ABOUT_IMAGE_2 = asset("tipo1.jpg"); 
 export const PATTERN_IMAGE = "https://k.sinaimg.cn/n/sinakd20240212s/538/w1000h538/20240212/e8f7-f1388b0227d81a938c5f5904d6074218.png/w700d1q75cms.jpg";
 
 // Constantes para la nueva sección "Otros Proyectos"
-export const OTHER_PROJECTS_HEADER = asset("otros_proyectos.png");
-export const OTHER_IMG_1 = asset("publicidad.png"); 
-export const OTHER_IMG_2 = asset("carteles_tipograficos.png");
-export const OTHER_IMG_3 = asset("publicidad_fotografica.png");
-export const OTHER_IMG_4 = asset("carteles_ilustrados.png");
+export const OTHER_PROJECTS_HEADER = asset("ilusport.png");
+export const OTHER_IMG_1 = asset("publiport.png"); 
+export const OTHER_IMG_2 = asset("tipo1.jpg");
+export const OTHER_IMG_3 = asset("publifotoport.jpg");
+export const OTHER_IMG_4 = asset("ilusport.png");
 
 // IMÁGENES DEL LIBRO (SEPARADAS)
 export const BOOK_FRONT = asset("confesiones_front.jpg");
@@ -127,7 +127,7 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     description: "Diseño de publicidades variadas, flyers para cursos y manejo de redes sociales. Realizadas con Photoshop e Illustrator.",
     tools: ["Photoshop", "Illustrator"],
     coverImage: OTHER_IMG_1,
-    images: [OTHER_IMG_1] 
+    images: [OTHER_IMG_1, asset("publicidad1.jpg"), asset("publicidad2.jpg"), asset("publicidad3.jpg")] 
   },
   {
     id: "carteles-tipograficos",
@@ -147,7 +147,7 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     description: "Publicidades las cuales se realizó con un trabajo fotográfico desde cero, montaje y post-producción.",
     tools: ["Photography", "Photoshop"],
     coverImage: OTHER_IMG_3,
-    images: [OTHER_IMG_3]
+    images: [OTHER_IMG_3, asset("publfoto1.jpg"), asset("publfoto2.jpg"), asset("publfoto3.jpg")]
   },
   {
     id: "carteles-ilustrados",
@@ -157,7 +157,7 @@ export const OTHER_PROJECTS_LIST: Project[] = [
     description: "Carteles ilustrados con un estilo artístico predominante. Realizados en programas como IbisPaint y Photoshop.",
     tools: ["IbisPaint", "Photoshop"],
     coverImage: OTHER_IMG_4,
-    images: [OTHER_IMG_4]
+    images: [OTHER_IMG_4, asset("ilustra1.jpg"), asset("ilustra2jpg.jpg"), asset("ilustra3.jpg")]
   }
 ];
 
